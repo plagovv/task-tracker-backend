@@ -23,7 +23,7 @@
 1. Клонируйте репозиторий:
 
 ```bash 
-git clone <ваш_репозиторий> cd task-tracker-backend
+git clone git@gitlab.com:plagov-task-tracker/task-tracker-backend.git && cd task-tracker-backend
 ```
 
 2. Установите зависимости:
