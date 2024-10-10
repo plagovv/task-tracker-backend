@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Status',
         required: true,
-        default: 1
+        default: "620b5f66b5e5c7f5f2bc84b0"
     },
     priority: {
         type: Number,
