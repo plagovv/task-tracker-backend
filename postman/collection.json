@@ -1,0 +1,160 @@
+{
+  "info": {
+    "_postman_id": "e631b8d3-bb06-4e9e-ae42-633b9ee77dc2",
+    "name": "Task Tracker API",
+    "description": "Collection for testing Task Tracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "url": "{{base_url}}/api/auth/register",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"user1\", \"password\": \"password123\"}"
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "url": "{{base_url}}/api/auth/login",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"user1\", \"password\": \"password123\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Statuses",
+      "item": [
+        {
+          "name": "Get All Statuses",
+          "request": {
+            "url": "{{base_url}}/api/statuses",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "Create Status",
+          "request": {
+            "url": "{{base_url}}/api/statuses",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"К выполнению\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Create Task",
+          "request": {
+            "url": "{{base_url}}/api/tasks",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Задача 1\", \"description\": \"Описание задачи\", \"status\": \"<status_id>\", \"priority\": 2}"
+            }
+          }
+        },
+        {
+          "name": "Get All Tasks",
+          "request": {
+            "url": "{{base_url}}/api/tasks",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "url": "{{base_url}}/api/tasks/<task_id>",
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Задача 1 обновлена\", \"description\": \"Новое описание\", \"status\": \"<new_status_id>\", \"priority\": 2}"
+            }
+          }
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "url": "{{base_url}}/api/tasks/<task_id>",
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

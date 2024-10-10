@@ -20,7 +20,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/statuses', statusRoutes); // Подключаем маршруты статусов
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

@@ -4,9 +4,9 @@ services:
   app:
     build:
       context: .
-      dockerfile: /docker/Dockerfile
+      dockerfile: ./docker/Dockerfile
     ports:
-      - "5000:5000"
+      - "3005:3005"
     environment:
       - MONGO_URI=mongodb://mongo:27017/task-tracker
       - JWT_SECRET=your_jwt_secret
@@ -19,6 +19,16 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+
+  migrate:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    command: ["node", "migrations/seedStatuses.js"]
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/task-tracker
+    depends_on:
+      - mongo
 
 volumes:
   mongo-data:
