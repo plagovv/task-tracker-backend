@@ -63,14 +63,22 @@ router.post('/refresh-token', async (req, res) => {
         const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET);
 
         // Проверка, существует ли пользователь с данным id и его refreshToken
-        const user = await User.findById(decoded.id).exec();
+        const user = await User.findOne({ _id: decoded.id })
+
         if (!user || user.refreshToken !== refreshToken) {
             return res.status(403).json({ message: 'Invalid refresh token' });
         }
 
         // Генерация нового access токена
         const newAccessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ accessToken: newAccessToken });
+        // Генерация refresh токена
+        const newRefreshToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
+
+        // Сохраняем refresh токен в базе данных (если это необходимо, в противном случае можете пропустить этот шаг)
+        user.refreshToken = newRefreshToken; // Убедитесь, что вы добавили поле refreshToken в модель пользователя
+        await user.save();
+
+        res.json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
     } catch (error) {
         return res.status(403).json({ message: 'Invalid refresh token' });
     }

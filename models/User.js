@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    refreshToken: {
+        type: String,
+        // Не обязательно, но можно установить это значение только если нужно
+        // default: null
+    },
 });
 
 // Хеширование пароля перед сохранением
