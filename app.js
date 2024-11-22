@@ -4,7 +4,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks');
-const statusRoutes = require('./routes/statuses'); // Импортируем маршруты статусов
+const statusRoutes = require('./routes/statuses');
+const collectionsRoutes = require('./routes/collections');
 
 dotenv.config();
 
@@ -18,7 +19,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
-app.use('/api/statuses', statusRoutes); // Подключаем маршруты статусов
+app.use('/api/statuses', statusRoutes);
+app.use('/api/collections', collectionsRoutes);
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {

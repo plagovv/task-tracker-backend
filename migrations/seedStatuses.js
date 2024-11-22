@@ -4,9 +4,9 @@ require('dotenv').config();
 
 // Устанавливаем одинаковые идентификаторы для статусов
 const statuses = [
-    { _id: new mongoose.Types.ObjectId('620b5f66b5e5c7f5f2bc84b0'), name: 'К выполнению' },
-    { _id: new mongoose.Types.ObjectId('620b5f66b5e5c7f5f2bc84b1'), name: 'В работе' },
-    { _id: new mongoose.Types.ObjectId('620b5f66b5e5c7f5f2bc84b2'), name: 'Готово' },
+    { _id: new mongoose.Types.ObjectId('620b5f66b5e5c7f5f2bc84b0'), name: 'К выполнению', type: "todo" },
+    { _id: new mongoose.Types.ObjectId('620b5f66b5e5c7f5f2bc84b1'), name: 'В работе', type: "process" },
+    { _id: new mongoose.Types.ObjectId('620b5f66b5e5c7f5f2bc84b2'), name: 'Готово', type: "done" },
 ];
 
 async function seedStatuses() {
