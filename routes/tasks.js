@@ -26,6 +26,16 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
+// Получение задач для текущего пользователя
+router.get('/:id', auth, async (req, res) => {
+    try {
+        const task = await Task.findOne({user: req.userId, _id: req.params.id}).populate('status'); // Популяция для отображения статуса
+        res.json(task);
+    } catch (error) {
+        res.status(500).json({message: 'Error fetching task'});
+    }
+});
+
 // Обновление задачи
 router.put('/:id', auth, async (req, res) => {
     const {title, description, status, priority, collection} = req.body;
